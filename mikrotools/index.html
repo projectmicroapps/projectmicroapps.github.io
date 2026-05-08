@@ -21,7 +21,7 @@
     }
 
     /* Tool Header */
-    .nav-back { display: flex; align-items: center; padding: 20px; gap: 16px; max-width: 800px; margin: 0 auto; }
+    .nav-back { display: flex; align-items: center; padding: 20px; gap: 16px; max-width: 900px; margin: 0 auto; }
     .back-button {
         width: 44px; height: 44px;
         background: var(--glass-bg);
@@ -39,23 +39,23 @@
 
     /* Content Container */
     .content { 
-        max-width: 850px; /* Etwas breiter für 3 Spalten */
+        max-width: 900px; 
         margin: 0 auto; 
         padding: 0 20px 40px; 
     }
 
     .tools-grid {
         display: grid;
-        /* Standard: 2 Spalten für Mobile */
-        grid-template-columns: repeat(2, 1fr);
+        /* Standard Mobile: 2 Spalten */
+        grid-template-columns: 1fr 1fr;
         gap: 16px;
         margin-top: 24px;
     }
 
-    /* Desktop-Ansicht: 3 Spalten */
-    @media (min-width: 600px) {
+    /* Desktop-Ansicht: 3 Spalten ab Tablet-Breite */
+    @media (min-width: 768px) {
         .tools-grid {
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 20px;
         }
     }
@@ -73,10 +73,9 @@
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         cursor: pointer;
-        transition: all 0.2s ease;
+        transition: all 0.2s ease-out;
     }
     
-    /* Hover-Effekt für Desktop */
     @media (hover: hover) {
         .tool-card:hover {
             background: rgba(255, 255, 255, 0.1);
@@ -86,7 +85,7 @@
     .tool-card:active { transform: scale(0.95); }
 
     .tool-icon {
-        width: 36px; /* Etwas kleiner für besseres Spacing */
+        width: 36px;
         height: 36px;
         background-color: white;
         -webkit-mask-size: contain;
@@ -143,7 +142,6 @@
     </div>
 
     <script>
-        // Exakt deine Liste aus dem Kotlin Code
         const tools = [
             { name: "Wasserwaage", desc: "Neigung messen", file: "ic_level" },
             { name: "Dezibel", desc: "Schallpegel", file: "ic_mic" },
@@ -175,7 +173,7 @@
             `;
             card.onclick = () => {
                 document.getElementById('detailTitle').innerText = tool.name;
-                document.getElementById('detailDesc').innerText = `Nutze das ${tool.name} Werkzeug, um präzise Daten über ${tool.desc} direkt von deinen Hardware-Sensoren zu erhalten. Keine Cloud, kein Tracking.`;
+                document.getElementById('detailDesc').innerText = `Nutze das ${tool.name} Werkzeug, um präzise Daten über ${tool.desc} direkt von deinen Hardware-Sensoren zu erhalten.`;
                 document.getElementById('overlay').style.display = 'flex';
             };
             grid.appendChild(card);
