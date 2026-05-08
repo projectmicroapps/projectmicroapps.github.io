@@ -5,30 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MikroTools | Project Micro</title>
     <style>
-        :root { --accent-color: #01163E; } /* Festgelegte Farbe für diese App */
+        :root { 
+            --accent-color: #1A1C1E; /* Standard-Fallback */
+        } 
         
         body, html {
             margin: 0; padding: 0;
+            min-height: 100vh;
             font-family: 'Segoe UI', sans-serif;
             color: white;
+            /* Gradient wie auf Hauptseite */
             background: linear-gradient(to bottom right, #000000 0%, var(--accent-color) 100%);
             background-attachment: fixed;
         }
-
+        /* ... (Rest deines CSS bleibt gleich) ... */
         .nav-back { padding: 20px; }
         .nav-back a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.9rem; }
-
         .content { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
-        
         .app-header { display: flex; align-items: center; gap: 30px; margin-bottom: 50px; }
         .app-icon { width: 120px; height: 120px; background: rgba(255,255,255,0.1); border-radius: 28px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; border: 1px solid rgba(255,255,255,0.2); }
-
         .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
         .feature-card { background: rgba(255,255,255,0.03); padding: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
-        
         h1 { margin: 0; font-size: 2.5rem; }
         .description { font-size: 1.2rem; opacity: 0.8; line-height: 1.6; }
-        
         @media (max-width: 600px) {
             .app-header { flex-direction: column; text-align: center; }
             .feature-grid { grid-template-columns: 1fr; }
@@ -49,31 +48,24 @@
                 <p style="opacity: 0.6;">Version 1.0 (Coming Soon)</p>
             </div>
         </div>
-
-        <p class="description">
-            MikroTools vereint alle wichtigen Werkzeuge für deinen Alltag in einer einzigen, performanten App. 
-            Kein Wechseln zwischen Apps mehr nötig.
-        </p>
-
+        <p class="description">MikroTools vereint alle wichtigen Werkzeuge...</p>
         <div class="feature-grid">
-            <div class="feature-card">
-                <h3>Einheiten-Konverter</h3>
-                <p>Konvertiere Währungen, Maße und Gewichte in Echtzeit.</p>
-            </div>
-            <div class="feature-card">
-                <h3>QR & Barcode</h3>
-                <p>Schnelles Scannen und Erstellen von Codes direkt integriert.</p>
-            </div>
-            <div class="feature-card">
-                <h3>File Tools</h3>
-                <p>Verwalte und konvertiere Dateien direkt auf deinem Smartphone.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Privacy First</h3>
-                <p>Alle Berechnungen finden lokal statt. Deine Daten gehören dir.</p>
-            </div>
+            <div class="feature-card"><h3>Einheiten-Konverter</h3><p>...</p></div>
+            <div class="feature-card"><h3>QR & Barcode</h3><p>...</p></div>
+            <div class="feature-card"><h3>File Tools</h3><p>...</p></div>
+            <div class="feature-card"><h3>Privacy First</h3><p>...</p></div>
         </div>
     </div>
 
+    <script>
+        // Farbe aus URL extrahieren
+        const urlParams = new URLSearchParams(window.location.search);
+        const passedColor = urlParams.get('color');
+
+        if (passedColor) {
+            // Wenn eine Farbe übergeben wurde, setze sie
+            document.documentElement.style.setProperty('--accent-color', passedColor);
+        }
+    </script>
 </body>
 </html>
