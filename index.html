@@ -151,18 +151,19 @@
         const colorParam = encodeURIComponent(activeColor);
         window.location.href = `./mikrotools/index.html?color=${colorParam}`;
     }
-</script>
-        const mikroColors = [
-            '#C0C0C0', // Silver
-            '#01163E', // Deep Blue
-            '#013E16', // Deep Green
-            '#2B013E', // Deep Purple
-            '#3E0101', // Deep Red
-            '#1A1C1E'  // Dark Grey
-        ];
+<script>
+    const mikroColors = ['#C0C0C0', '#01163E', '#013E16', '#2B013E', '#3E0101', '#1A1C1E'];
 
-        const randomColor = mikroColors[Math.floor(Math.random() * mikroColors.length)];
-        document.documentElement.style.setProperty('--accent-color', randomColor);
-    </script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const colorFromUrl = urlParams.get('color');
+
+    let activeColor = colorFromUrl || mikroColors[Math.floor(Math.random() * mikroColors.length)];
+
+    document.documentElement.style.setProperty('--accent-color', activeColor);
+
+    function navigateToApp() {
+        window.location.href = `./mikrotools/index.html?color=${encodeURIComponent(activeColor)}`;
+    }
+</script>
 </body>
 </html>
