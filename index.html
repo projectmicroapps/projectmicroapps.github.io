@@ -128,20 +128,30 @@
         </div>
     </div>
 <script>
-        const mikroColors = [
-            '#C0C0C0', '#01163E', '#013E16', '#2B013E', '#3E0101', '#1A1C1E'
-        ];
+    const mikroColors = [
+        '#C0C0C0', '#01163E', '#013E16', '#2B013E', '#3E0101', '#1A1C1E'
+    ];
 
-        const randomColor = mikroColors[Math.floor(Math.random() * mikroColors.length)];
-        document.documentElement.style.setProperty('--accent-color', randomColor);
+    // 1. Prüfen, ob eine Farbe per URL zurückgegeben wurde
+    const urlParams = new URLSearchParams(window.location.search);
+    const colorFromUrl = urlParams.get('color');
 
-        // NEU: Funktion zur Übergabe der Farbe
-        function navigateToApp() {
-            // Wir kodieren das '#' Zeichen für die URL (wird zu %23)
-            const colorParam = encodeURIComponent(randomColor);
-            window.location.href = `./mikrotools/index.html?color=${colorParam}`;
-        }
-    </script>
+    // 2. Entweder die übergebene Farbe nehmen oder neu würfeln
+    let activeColor;
+    if (colorFromUrl) {
+        activeColor = colorFromUrl;
+    } else {
+        activeColor = mikroColors[Math.floor(Math.random() * mikroColors.length)];
+    }
+
+    // 3. Farbe im CSS setzen
+    document.documentElement.style.setProperty('--accent-color', activeColor);
+
+    function navigateToApp() {
+        const colorParam = encodeURIComponent(activeColor);
+        window.location.href = `./mikrotools/index.html?color=${colorParam}`;
+    }
+</script>
         const mikroColors = [
             '#C0C0C0', // Silver
             '#01163E', // Deep Blue
