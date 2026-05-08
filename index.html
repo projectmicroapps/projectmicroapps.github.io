@@ -119,20 +119,29 @@
         <p class="subtitle">MikroTools & Development</p>
     </header>
 
-    <div class="container">
-        <div class="app-card">
+<div class="container">
+        <div class="app-card" onclick="navigateToApp()" style="cursor: pointer;">
             <div class="app-icon">MT</div>
             <div class="status-tag">In Entwicklung</div>
             <h2>MikroTools</h2>
             <p>Die ultimative All-in-One Lösung für Konvertierung, Scannen und tägliche Tools. Demnächst im Google Play Store verfügbar.</p>
         </div>
     </div>
+<script>
+        const mikroColors = [
+            '#C0C0C0', '#01163E', '#013E16', '#2B013E', '#3E0101', '#1A1C1E'
+        ];
 
-    <footer>
-        &copy; 2026 Project Micro
-    </footer>
+        const randomColor = mikroColors[Math.floor(Math.random() * mikroColors.length)];
+        document.documentElement.style.setProperty('--accent-color', randomColor);
 
-    <script>
+        // NEU: Funktion zur Übergabe der Farbe
+        function navigateToApp() {
+            // Wir kodieren das '#' Zeichen für die URL (wird zu %23)
+            const colorParam = encodeURIComponent(randomColor);
+            window.location.href = `./mikrotools/index.html?color=${colorParam}`;
+        }
+    </script>
         const mikroColors = [
             '#C0C0C0', // Silver
             '#01163E', // Deep Blue
