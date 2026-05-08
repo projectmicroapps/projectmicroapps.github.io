@@ -6,79 +6,77 @@
     <title>Project Micro | Official Site</title>
     <style>
         :root {
-            /* Diese Farben werden per JS überschrieben, dienen aber als Fallback */
-            --grad-1: #0f172a;
-            --grad-2: #1e293b;
-            --accent: #ffffff;
+            /* Fallback Farben */
+            --accent-color: #1A1C1E; 
         }
 
-        body {
-            /* Der dynamische Gradient */
-            background: linear-gradient(135deg, var(--grad-1) 0%, var(--grad-2) 100%);
-            background-attachment: fixed;
-            color: white;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        body, html {
             margin: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            transition: background 0.5s ease; /* Weicher Übergang beim Laden */
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            color: white;
+            /* Der vertikale Gradient wie in deiner MainActivity */
+            background: linear-gradient(to bottom, var(--accent-color) 0%, #000000 100%);
+            background-attachment: fixed;
+            transition: background 0.8s ease;
         }
 
         header {
-            padding: 60px 20px;
+            padding: 80px 20px 40px;
             text-align: center;
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin: 0;
-            font-weight: 800;
-            letter-spacing: -2px;
+            font-weight: 700;
+            letter-spacing: -1.5px;
         }
 
         .subtitle {
-            opacity: 0.7;
+            opacity: 0.6;
             font-size: 1.1rem;
-            margin-top: 5px;
+            margin-top: 8px;
         }
 
         .container {
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            flex-grow: 1;
         }
 
-        /* Orientiert an deinen NavigationBarItems (Transparenz & Glas-Look) */
+        /* Glassmorphism App-Card (passend zum transparenten Surface-Look) */
         .app-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 32px;
             padding: 40px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
         }
 
-        .app-icon-placeholder {
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            margin: 0 auto 20px;
+        .app-icon {
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 22px;
+            margin: 0 auto 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
+        h2 { margin-bottom: 10px; }
+        p { opacity: 0.8; line-height: 1.5; margin-bottom: 30px; }
+
         .play-store-badge img {
-            height: 55px;
-            margin-top: 20px;
-            transition: transform 0.2s;
+            height: 50px;
+            transition: transform 0.2s ease;
         }
 
         .play-store-badge img:hover {
@@ -87,9 +85,9 @@
 
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 40px;
             font-size: 0.8rem;
-            opacity: 0.5;
+            opacity: 0.4;
         }
     </style>
 </head>
@@ -97,14 +95,14 @@
 
     <header>
         <h1>Project Micro</h1>
-        <p class="subtitle">MikroTools & Development</p>
+        <p class="subtitle">MikroTools & Mobile Solutions</p>
     </header>
 
     <div class="container">
         <div class="app-card">
-            <div class="app-icon-placeholder">MT</div>
+            <div class="app-icon">MT</div>
             <h2>MikroTools</h2>
-            <p>Dein All-in-One Begleiter für Tools, Konvertierung und Scan.</p>
+            <p>Konvertierung, Scannen und Tools in einer App. Schlicht, schnell und effizient.</p>
             
             <a href="#" class="play-store-badge">
                 <img src="https://play.google.com/intl/en_us/badges/static/images/badges/de_badge_web_generic.png" alt="Google Play">
@@ -113,25 +111,25 @@
     </div>
 
     <footer>
-        &copy; 2026 Project Micro | Built with Github Pages
+        &copy; 2026 Project Micro
     </footer>
 
     <script>
-        // Hier definierst du die Farbkombinationen für deine App
-        const themes = [
-            { c1: '#0f172a', c2: '#1e293b' }, // Dark Slate (Standard)
-            { c1: '#1a1a2e', c2: '#16213e' }, // Deep Blue
-            { c1: '#2d033b', c2: '#810ca8' }, // Cyber Purple
-            { c1: '#000000', c2: '#434343' }, // Pure Dark
-            { c1: '#051937', c2: '#008793' }  // Deep Sea
+        // Deine exakte Farbliste aus dem Kotlin Code
+        const mikroColors = [
+            '#C0C0C0', // Silver
+            '#01163E', // Deep Blue
+            '#013E16', // Deep Green
+            '#2B013E', // Deep Purple
+            '#3E0101', // Deep Red
+            '#1A1C1E'  // Dark Grey
         ];
 
-        // Zufälliges Theme wählen
-        const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+        // Zufallsauswahl
+        const randomColor = mikroColors[Math.floor(Math.random() * mikroColors.length)];
 
-        // CSS Variablen im Root-Element setzen
-        document.documentElement.style.setProperty('--grad-1', randomTheme.c1);
-        document.documentElement.style.setProperty('--grad-2', randomTheme.c2);
+        // Setzt die CSS Variable für den Gradient-Start
+        document.documentElement.style.setProperty('--accent-color', randomColor);
     </script>
 </body>
 </html>
