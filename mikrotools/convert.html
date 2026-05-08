@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konvertieren | MikroTools</title>
+    <style>
+        :root {
+            --accent-color: #01163E; 
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body, html {
+            margin: 0; padding: 0; min-height: 100vh;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            color: white;
+            background: linear-gradient(to bottom right, #000000 0%, var(--accent-color) 100%);
+            background-attachment: fixed;
+        }
+
+        .nav-header { display: flex; align-items: center; padding: 20px; gap: 16px; max-width: 900px; margin: 0 auto; }
+        .back-btn {
+            width: 44px; height: 44px; background: var(--glass-bg);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--glass-border); cursor: pointer; color: white; text-decoration: none;
+        }
+
+        .content { max-width: 900px; margin: 0 auto; padding: 0 20px 40px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+        @media (min-width: 768px) { .grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+        .card {
+            aspect-ratio: 1 / 1; background: var(--glass-bg);
+            border: 1px solid var(--glass-border); border-radius: 24px;
+            padding: 20px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            backdrop-filter: blur(20px); cursor: pointer; transition: 0.2s;
+        }
+        .card:hover { background: rgba(255,255,255,0.1); transform: translateY(-5px); }
+
+        .icon {
+            width: 40px; height: 40px; background-color: white;
+            -webkit-mask-size: contain; mask-size: contain;
+            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+            margin-bottom: 12px;
+        }
+        .card h3 { margin: 0; font-size: 16px; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <div class="nav-header">
+        <a href="#" onclick="goBack()" class="back-btn"> < </a>
+        <h1 style="margin:0; font-size: 28px;">Konvertieren</h1>
+    </div>
+
+    <div class="content">
+        <div class="grid" id="convertGrid"></div>
+    </div>
+
+    <script>
+        const tools = [
+            { name: "Einheiten", icon: "ic_unit_conv" },
+            { name: "Dateien", icon: "ic_file_conv" },
+            { name: "Finanzen", icon: "ic_currency" },
+            { name: "Lifestyle", icon: "ic_lifestyle" }
+        ];
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeColor = urlParams.get('color') || '#01163E';
+        document.documentElement.style.setProperty('--accent-color', activeColor);
+
+        const grid = document.getElementById('convertGrid');
+        tools.forEach(t => {
+            const div = document.createElement('div');
+            div.className = 'card';
+            div.innerHTML = `
+                <div class="icon" style="-webkit-mask-image: url('../assets/icons/${t.icon}.svg');"></div>
+                <h3>${t.name}</h3>
+            `;
+            div.onclick = () => alert(t.name + " kommt bald!");
+            grid.appendChild(div);
+        });
+
+        function goBack() {
+            window.location.href = `index.html?color=${encodeURIComponent(activeColor)}`;
+        }
+    </script>
+</body>
+</html>
