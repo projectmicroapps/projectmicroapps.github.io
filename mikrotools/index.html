@@ -36,9 +36,9 @@
 </head>
 <body>
 
-    <nav class="nav-back">
-        <a href="../index.html">← Zurück zu Project Micro</a>
-    </nav>
+<nav class="nav-back">
+    <a href="javascript:void(0)" onclick="goBack()" style="cursor: pointer;">← Zurück zu Project Micro</a>
+</nav>
 
     <div class="content">
         <div class="app-header">
@@ -56,16 +56,26 @@
             <div class="feature-card"><h3>Privacy First</h3><p>...</p></div>
         </div>
     </div>
+    
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const passedColor = urlParams.get('color');
 
-    <script>
-        // Farbe aus URL extrahieren
-        const urlParams = new URLSearchParams(window.location.search);
-        const passedColor = urlParams.get('color');
+    if (passedColor) {
+        document.documentElement.style.setProperty('--accent-color', passedColor);
+    }
 
+    // NEU: Funktion für den Rückweg
+    function goBack() {
         if (passedColor) {
-            // Wenn eine Farbe übergeben wurde, setze sie
-            document.documentElement.style.setProperty('--accent-color', passedColor);
+            // Farbe wieder zurückgeben
+            const colorParam = encodeURIComponent(passedColor);
+            window.location.href = `../index.html?color=${colorParam}`;
+        } else {
+            // Fallback falls keine Farbe da ist
+            window.location.href = '../index.html';
         }
-    </script>
+    }
+</script>
 </body>
 </html>
