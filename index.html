@@ -5,106 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Micro | Official Site</title>
     <style>
-        /* Modernes Design-System */
         :root {
-            --bg: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
-            --accent: #38bdf8;
+            /* Diese Farben werden per JS überschrieben, dienen aber als Fallback */
+            --grad-1: #0f172a;
+            --grad-2: #1e293b;
+            --accent: #ffffff;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            font-family: 'Inter', -apple-system, sans-serif;
+            /* Der dynamische Gradient */
+            background: linear-gradient(135deg, var(--grad-1) 0%, var(--grad-2) 100%);
+            background-attachment: fixed;
+            color: white;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            transition: background 0.5s ease; /* Weicher Übergang beim Laden */
+        }
+
+        header {
+            padding: 60px 20px;
             text-align: center;
         }
 
-        /* Hero Sektion */
-        header {
-            padding: 80px 20px;
-            background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
-        }
-
         h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin: 0;
-            letter-spacing: -1px;
-            background: linear-gradient(to right, #fff, var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -2px;
         }
 
         .subtitle {
-            color: var(--text-dim);
-            font-size: 1.2rem;
-            margin-top: 10px;
+            opacity: 0.7;
+            font-size: 1.1rem;
+            margin-top: 5px;
         }
 
-        /* App Container */
         .container {
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 20px;
             flex-grow: 1;
         }
 
+        /* Orientiert an deinen NavigationBarItems (Transparenz & Glas-Look) */
         .app-card {
-            background: var(--card-bg);
-            border-radius: 24px;
-            padding: 30px;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .app-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
 
         .app-icon-placeholder {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #334155 0%, #0f172a 100%);
-            border-radius: 25px;
-            margin-bottom: 20px;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: var(--accent);
-            font-size: 2rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        .play-store-badge {
+        .play-store-badge img {
+            height: 55px;
             margin-top: 20px;
-            opacity: 0.8;
-            transition: opacity 0.3s;
+            transition: transform 0.2s;
         }
 
-        .play-store-badge:hover {
-            opacity: 1;
+        .play-store-badge img:hover {
+            transform: scale(1.05);
         }
 
         footer {
-            padding: 40px;
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        /* Für Handys optimieren */
-        @media (max-width: 600px) {
-            h1 { font-size: 2.2rem; }
+            text-align: center;
+            padding: 30px;
+            font-size: 0.8rem;
+            opacity: 0.5;
         }
     </style>
 </head>
@@ -112,24 +97,41 @@
 
     <header>
         <h1>Project Micro</h1>
-        <p class="subtitle">Creative Apps & Development</p>
+        <p class="subtitle">MikroTools & Development</p>
     </header>
 
     <div class="container">
         <div class="app-card">
-            <div class="app-icon-placeholder">PM</div>
-            <h2>Coming Soon</h2>
-            <p style="color: var(--text-dim);">Wir arbeiten aktuell an spannenden neuen Apps für Android. Bleib gespannt!</p>
+            <div class="app-icon-placeholder">MT</div>
+            <h2>MikroTools</h2>
+            <p>Dein All-in-One Begleiter für Tools, Konvertierung und Scan.</p>
             
             <a href="#" class="play-store-badge">
-                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/de_badge_web_generic.png" alt="Google Play" height="60">
+                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/de_badge_web_generic.png" alt="Google Play">
             </a>
         </div>
     </div>
 
     <footer>
-        &copy; 2026 Project Micro
+        &copy; 2026 Project Micro | Built with Github Pages
     </footer>
 
+    <script>
+        // Hier definierst du die Farbkombinationen für deine App
+        const themes = [
+            { c1: '#0f172a', c2: '#1e293b' }, // Dark Slate (Standard)
+            { c1: '#1a1a2e', c2: '#16213e' }, // Deep Blue
+            { c1: '#2d033b', c2: '#810ca8' }, // Cyber Purple
+            { c1: '#000000', c2: '#434343' }, // Pure Dark
+            { c1: '#051937', c2: '#008793' }  // Deep Sea
+        ];
+
+        // Zufälliges Theme wählen
+        const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+
+        // CSS Variablen im Root-Element setzen
+        document.documentElement.style.setProperty('--grad-1', randomTheme.c1);
+        document.documentElement.style.setProperty('--grad-2', randomTheme.c2);
+    </script>
 </body>
 </html>
