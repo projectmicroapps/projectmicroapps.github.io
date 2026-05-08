@@ -13,7 +13,7 @@
         body, html {
             margin: 0;
             padding: 0;
-            height: 100%;
+            min-height: 100vh;
             font-family: 'Segoe UI', Roboto, sans-serif;
             color: white;
             /* Gradient: Oben links Schwarz, unten rechts Akzentfarbe */
@@ -34,7 +34,6 @@
             margin: 0;
             font-weight: 700;
             letter-spacing: -2px;
-            /* Subtiler Glow-Effekt für den Titel auf dunklem Grund */
             text-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
 
@@ -51,6 +50,8 @@
             margin: 0 auto;
             padding: 20px;
             flex-grow: 1;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         /* Glassmorphism App-Card */
@@ -63,6 +64,13 @@
             padding: 50px 40px;
             text-align: center;
             box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .app-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .app-icon {
@@ -94,7 +102,7 @@
             font-weight: 600;
             margin-bottom: 20px;
             color: var(--accent-color);
-            filter: brightness(1.5); /* Macht die dunklen Akzentfarben lesbarer */
+            filter: brightness(1.5);
         }
 
         p { 
@@ -119,51 +127,43 @@
         <p class="subtitle">MikroTools & Development</p>
     </header>
 
-<div class="container">
-        <div class="app-card" onclick="navigateToApp()" style="cursor: pointer;">
+    <div class="container">
+        <div class="app-card" onclick="navigateToApp()">
             <div class="app-icon">MT</div>
             <div class="status-tag">In Entwicklung</div>
             <h2>MikroTools</h2>
             <p>Die ultimative All-in-One Lösung für Konvertierung, Scannen und tägliche Tools. Demnächst im Google Play Store verfügbar.</p>
         </div>
     </div>
-<script>
-    const mikroColors = [
-        '#C0C0C0', '#01163E', '#013E16', '#2B013E', '#3E0101', '#1A1C1E'
-    ];
 
-    // 1. Prüfen, ob eine Farbe per URL zurückgegeben wurde
-    const urlParams = new URLSearchParams(window.location.search);
-    const colorFromUrl = urlParams.get('color');
+    <footer>
+        &copy; 2026 Project Micro
+    </footer>
 
-    // 2. Entweder die übergebene Farbe nehmen oder neu würfeln
-    let activeColor;
-    if (colorFromUrl) {
-        activeColor = colorFromUrl;
-    } else {
-        activeColor = mikroColors[Math.floor(Math.random() * mikroColors.length)];
-    }
+    <script>
+        const mikroColors = [
+            '#C0C0C0', // Silver
+            '#01163E', // Deep Blue
+            '#013E16', // Deep Green
+            '#2B013E', // Deep Purple
+            '#3E0101', // Deep Red
+            '#1A1C1E'  // Dark Grey
+        ];
 
-    // 3. Farbe im CSS setzen
-    document.documentElement.style.setProperty('--accent-color', activeColor);
+        // 1. Farbe aus URL holen oder zufällig wählen
+        const urlParams = new URLSearchParams(window.location.search);
+        const colorFromUrl = urlParams.get('color');
 
-    function navigateToApp() {
-        const colorParam = encodeURIComponent(activeColor);
-        window.location.href = `./mikrotools/index.html?color=${colorParam}`;
-    }
-<script>
-    const mikroColors = ['#C0C0C0', '#01163E', '#013E16', '#2B013E', '#3E0101', '#1A1C1E'];
+        let activeColor = colorFromUrl || mikroColors[Math.floor(Math.random() * mikroColors.length)];
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const colorFromUrl = urlParams.get('color');
+        // 2. CSS-Variable setzen
+        document.documentElement.style.setProperty('--accent-color', activeColor);
 
-    let activeColor = colorFromUrl || mikroColors[Math.floor(Math.random() * mikroColors.length)];
-
-    document.documentElement.style.setProperty('--accent-color', activeColor);
-
-    function navigateToApp() {
-        window.location.href = `./mikrotools/index.html?color=${encodeURIComponent(activeColor)}`;
-    }
-</script>
+        // 3. Navigation mit Farbübergabe
+        function navigateToApp() {
+            const colorParam = encodeURIComponent(activeColor);
+            window.location.href = `./mikrotools/index.html?color=${colorParam}`;
+        }
+    </script>
 </body>
 </html>
