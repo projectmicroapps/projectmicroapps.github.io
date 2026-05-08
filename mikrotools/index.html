@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MikroTools | Hub</title>
+    <style>
+        :root {
+            --accent-color: #01163E; 
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body, html {
+            margin: 0; padding: 0; min-height: 100vh;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            color: white;
+            background: linear-gradient(to bottom right, #000000 0%, var(--accent-color) 100%);
+            background-attachment: fixed;
+        }
+
+        .header { padding: 40px 24px 20px; max-width: 900px; margin: 0 auto; }
+        .header h1 { font-size: 32px; font-weight: bold; margin: 0; }
+
+        .content { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (min-width: 768px) { .main-grid { grid-template-columns: 1fr 1fr 1fr 1fr; } }
+
+        .menu-card {
+            aspect-ratio: 1 / 1;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            backdrop-filter: blur(20px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none; color: white;
+        }
+
+        .menu-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-5px); }
+
+        .icon {
+            width: 40px; height: 40px;
+            background-color: white; /* Wird durch JS mit Accent Color überschrieben */
+            -webkit-mask-size: contain; mask-size: contain;
+            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+            margin-bottom: 16px;
+        }
+
+        .menu-card span { font-size: 16px; font-weight: 500; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1 id="headerTitle">MikroTools</h1>
+    </div>
+
+    <div class="content">
+        <div class="main-grid">
+            <a href="#" onclick="nav('tools.html')" class="menu-card">
+                <div class="icon" id="icon-tools" style="-webkit-mask-image: url('../assets/icons/ic_tools.svg');"></div>
+                <span>Werkzeuge</span>
+            </a>
+            <a href="#" onclick="nav('convert.html')" class="menu-card">
+                <div class="icon" id="icon-conv" style="-webkit-mask-image: url('../assets/icons/ic_unit_conv.svg');"></div>
+                <span>Konvertieren</span>
+            </a>
+            <a href="#" class="menu-card" style="opacity: 0.5; cursor: default;">
+                <div class="icon" style="-webkit-mask-image: url('../assets/icons/ic_qr.svg');"></div>
+                <span>Scannen</span>
+            </a>
+            <a href="#" class="menu-card" style="opacity: 0.5; cursor: default;">
+                <div class="icon" style="-webkit-mask-image: url('../assets/icons/ic_settings.svg');"></div>
+                <span>Einstellen</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeColor = urlParams.get('color') || '#01163E';
+        document.documentElement.style.setProperty('--accent-color', activeColor);
+        
+        // Icons in Akzentfarbe einfärben
+        document.querySelectorAll('.icon').forEach(icon => {
+            icon.style.backgroundColor = 'white'; // Standard Weiß für Glass-Look
+        });
+
+        function nav(target) {
+            window.location.href = `${target}?color=${encodeURIComponent(activeColor)}`;
+        }
+    </script>
+</body>
+</html>
