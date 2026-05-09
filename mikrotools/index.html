@@ -11,6 +11,12 @@
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
+        * {
+            /* Entfernt das blaue Viereck beim Klicken auf dem Handy */
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
         body, html {
             margin: 0; padding: 0; min-height: 100vh;
             font-family: 'Segoe UI', Roboto, sans-serif;
@@ -19,8 +25,32 @@
             background-attachment: fixed;
         }
 
-        .header { padding: 40px 24px 20px; max-width: 900px; margin: 0 auto; }
-        .header h1 { font-size: 32px; font-weight: bold; margin: 0; }
+        /* Nav Header mit Back Button */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            padding: 40px 24px 20px;
+            gap: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .back-button {
+            width: 44px;
+            height: 44px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s;
+        }
+        .back-button:active { transform: scale(0.9); }
+
+        .nav-header h1 { font-size: 32px; font-weight: bold; margin: 0; }
 
         .content { max-width: 900px; margin: 0 auto; padding: 20px; }
 
@@ -46,10 +76,11 @@
         }
 
         .menu-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-5px); }
+        .menu-card:active { transform: scale(0.95); }
 
         .icon {
             width: 40px; height: 40px;
-            background-color: white; /* Wird durch JS mit Accent Color überschrieben */
+            background-color: white;
             -webkit-mask-size: contain; mask-size: contain;
             -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
             margin-bottom: 16px;
@@ -60,28 +91,31 @@
 </head>
 <body>
 
-    <div class="header">
+    <div class="nav-header">
+        <div class="back-button" onclick="goBack()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </div>
         <h1 id="headerTitle">MikroTools</h1>
     </div>
 
     <div class="content">
         <div class="main-grid">
             <a href="#" onclick="nav('tools.html')" class="menu-card">
-                <div class="icon" id="icon-tools" style="-webkit-mask-image: url('../assets/icons/ic_tools.svg');"></div>
+                <div class="icon" style="-webkit-mask-image: url('../assets/icons/ic_tools.svg');"></div>
                 <span>Werkzeuge</span>
             </a>
             <a href="#" onclick="nav('convert.html')" class="menu-card">
-                <div class="icon" id="icon-conv" style="-webkit-mask-image: url('../assets/icons/ic_unit_conv.svg');"></div>
+                <div class="icon" style="-webkit-mask-image: url('../assets/icons/ic_unit_conv.svg');"></div>
                 <span>Konvertieren</span>
             </a>
-            <a href="#" class="menu-card" style="opacity: 0.5; cursor: default;">
+            <div class="menu-card" style="opacity: 0.3; cursor: default;">
                 <div class="icon" style="-webkit-mask-image: url('../assets/icons/ic_qr.svg');"></div>
                 <span>Scannen</span>
-            </a>
-            <a href="#" class="menu-card" style="opacity: 0.5; cursor: default;">
+            </div>
+            <div class="menu-card" style="opacity: 0.3; cursor: default;">
                 <div class="icon" style="-webkit-mask-image: url('../assets/icons/ic_settings.svg');"></div>
                 <span>Einstellen</span>
-            </a>
+            </div>
         </div>
     </div>
 
@@ -89,14 +123,14 @@
         const urlParams = new URLSearchParams(window.location.search);
         const activeColor = urlParams.get('color') || '#01163E';
         document.documentElement.style.setProperty('--accent-color', activeColor);
-        
-        // Icons in Akzentfarbe einfärben
-        document.querySelectorAll('.icon').forEach(icon => {
-            icon.style.backgroundColor = 'white'; // Standard Weiß für Glass-Look
-        });
 
         function nav(target) {
             window.location.href = `${target}?color=${encodeURIComponent(activeColor)}`;
+        }
+
+        function goBack() {
+            // Geht eine Ebene nach oben zur Project Micro Hauptseite
+            window.location.href = `../index.html?color=${encodeURIComponent(activeColor)}`;
         }
     </script>
 </body>
