@@ -176,23 +176,22 @@
                 </div>
             `;
             
-            card.onclick = () => {
+ card.onclick = () => {
     const extraInfo = typeof toolDescriptions !== 'undefined' ? toolDescriptions[tool.file] : null;
     
     document.getElementById('detailTitle').innerText = tool.name;
     
     if (extraInfo) {
-        let content = extraInfo.info || ""; 
+        // WICHTIG: Benutze <br><br> für eine neue Zeile + eine Leerzeile
+        const formattedText = 
+            extraInfo.info + 
+            "<br><br><br><b>" + extraInfo.usageTitle + "</b><br><br>" + 
+            extraInfo.usage;
 
-        if (extraInfo.usageTitle && extraInfo.usage) {
-            // Wir nutzen hier drei <br>, um über und unter dem fetten Titel 
-            // eine echte, volle Leerzeile zu erzwingen.
-            content += `<br><br><br><b>${extraInfo.usageTitle}</b><br><br>${extraInfo.usage}`;
-        }
-
-        document.getElementById('detailDesc').innerHTML = content;
+        // Nutze innerHTML, damit die <br> und <b> Tags interpretiert werden
+        document.getElementById('detailDesc').innerHTML = formattedText;
     } else {
-        document.getElementById('detailDesc').innerText = `Nutze das ${tool.name} Werkzeug für präzise Messungen.`;
+        document.getElementById('detailDesc').innerText = `Nutze das ${tool.name} Werkzeug.`;
     }
     
     document.getElementById('overlay').style.display = 'flex';
