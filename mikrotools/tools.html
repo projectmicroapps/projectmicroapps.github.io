@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MikroTools | Werkzeuge</title>
     <script src="tool_descriptions.js"></script>
     <style>
@@ -15,40 +15,53 @@
         * {
             -webkit-tap-highlight-color: transparent;
             outline: none;
+            box-sizing: border-box;
         }
         
-        body, html {
+        html {
+            background: linear-gradient(to bottom right, #000000 0%, var(--accent-color) 100%);
+            background-attachment: fixed;
+            min-height: 100%;
+        }
+
+        body {
             margin: 0; padding: 0;
             min-height: 100vh;
             font-family: 'Segoe UI', Roboto, sans-serif;
             color: white;
-            background: linear-gradient(to bottom right, #000000 0%, var(--accent-color) 100%);
-            background-attachment: fixed;
+            background: transparent;
+            overscroll-behavior-y: none;
         }
 
-        /* Tool Header */
-        .nav-back { display: flex; align-items: center; padding: 20px; gap: 16px; max-width: 900px; margin: 0 auto; }
+        /* Nav Header - Exakt wie im Index */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            padding: 40px 24px 20px;
+            gap: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
         .back-button {
-            width: 44px;
-            height: 44px;
+            width: 44px; height: 44px;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             cursor: pointer;
             backdrop-filter: blur(10px);
             transition: transform 0.2s;
         }
         .back-button:active { transform: scale(0.9); }
-        .page-title { font-size: 28px; font-weight: bold; margin: 0; }
+        
+        .nav-header h1 { font-size: 32px; font-weight: bold; margin: 0; }
 
         /* Content Container */
         .content { 
             max-width: 900px; 
             margin: 0 auto; 
-            padding: 0 20px 40px; 
+            padding: 0 20px 60px; 
         }
 
         .tools-grid {
@@ -70,7 +83,7 @@
             aspect-ratio: 1 / 1;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
+            border-radius: 32px; /* Auf 32px angepasst wie menu-card */
             padding: 16px;
             display: flex;
             flex-direction: column;
@@ -90,8 +103,7 @@
         .tool-card:active { transform: scale(0.95); }
 
         .tool-icon {
-            width: 36px;
-            height: 36px;
+            width: 36px; height: 36px;
             background-color: white;
             -webkit-mask-size: contain;
             mask-size: contain;
@@ -126,10 +138,14 @@
 </head>
 <body>
 
-    <nav class="nav-back">
-        <div class="back-button" onclick="goBack()"> < </div>
-        <h1 class="page-title">Werkzeuge</h1>
-    </nav>
+    <div class="nav-header">
+        <div class="back-button" onclick="goBack()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 18l-6-6 6-6"/>
+            </svg>
+        </div>
+        <h1>Werkzeuge</h1>
+    </div>
 
     <div class="content">
         <div class="tools-grid" id="toolsGrid"></div>
@@ -182,10 +198,9 @@
                 document.getElementById('detailTitle').innerText = tool.name;
                 
                 if (extraInfo) {
-                    // Zusammenbau des Inhalts mit fettem Titel und Leerzeilen
                     const formattedText = `
-                        ${extraInfo.info}<br><br>
-                        <b>${extraInfo.usageTitle}</b><br>
+                        ${extraInfo.info}<br><br><br>
+                        <b>${extraInfo.usageTitle}</b><br><br>
                         ${extraInfo.usage}
                     `;
                     document.getElementById('detailDesc').innerHTML = formattedText;
