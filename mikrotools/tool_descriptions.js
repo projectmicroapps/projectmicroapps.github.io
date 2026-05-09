@@ -5,7 +5,7 @@ const toolDescriptions = {
     },
     "ic_mic": {
         "title": "Dezibel-Messer",
-        "info": "Misst die Lautstärke der Umgebung in Dezibel (dB) über das integrierte Mikrofon.\n\nAnwendungsmöglichkeiten:\nEinschätzung von Lärmbelastung, Testen der Schalldämmung oder Lautstärkemessung bei Veranstaltungen."
+        "info": "Misst die Lautstärke der Umgebung in Dezibel über das integrierte Mikrofon.\n\nAnwendungsmöglichkeiten:\nEinschätzung von Lärmbelastung, Testen der Schalldämmung oder Lautstärkemessung bei Veranstaltungen."
     },
     "ic_magnet": {
         "title": "Metalldetektor",
@@ -37,6 +37,6 @@ const toolDescriptions = {
     },
     "ic_speed": {
         "title": "G-Kraft Messer",
-        "info": "Zeigt die auf das Gerät wirkenden Beschleunigungskräfte in den drei Raumachsen (X, Y, Z) an.\n\nAnwendungsmöglichkeiten:\nMessung von Erschütterungen, Analyse von Fahrbewegungen oder Testen der Stabilität von Halterungen."
+        "info": "Zeigt die auf das Gerät wirkenden Beschleunigungskräfte in den drei Raumachsen (X, Y, Z) an.\n\nAnwendungsmöglichkeiten:\nMessung von Erschütterungen, Analyse von Fahrbewegungen in beispielsweise einer Achterbahn oder Testen der Stabilität von Halterungen."
     }
 };
