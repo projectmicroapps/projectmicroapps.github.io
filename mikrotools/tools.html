@@ -3,126 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MikroTools | Project Micro</title>
-<style>
-    :root {
-        --accent-color: #01163E; 
-        --glass-bg: rgba(255, 255, 255, 0.05);
-        --glass-border: rgba(255, 255, 255, 0.1);
-    }
+    <title>MikroTools | Werkzeuge</title>
+    <script src="tool_descriptions.js"></script>
+    <style>
+        :root {
+            --accent-color: #01163E; 
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
 
-    * {
+        * {
             -webkit-tap-highlight-color: transparent;
             outline: none;
         }
-    
-    body, html {
-        margin: 0; padding: 0;
-        min-height: 100vh;
-        font-family: 'Segoe UI', Roboto, sans-serif;
-        color: white;
-        background: linear-gradient(to bottom right, #000000 0%, var(--accent-color) 100%);
-        background-attachment: fixed;
-    }
+        
+        body, html {
+            margin: 0; padding: 0;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            color: white;
+            background: linear-gradient(to bottom right, #000000 0%, var(--accent-color) 100%);
+            background-attachment: fixed;
+        }
 
-    /* Tool Header */
-    .nav-back { display: flex; align-items: center; padding: 20px; gap: 16px; max-width: 900px; margin: 0 auto; }
-    .back-button {
-        width: 44px; height: 44px;
-        background: var(--glass-bg);
-        border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        text-decoration: none; color: white;
-        font-weight: bold; font-size: 20px;
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--glass-border);
-        transition: transform 0.2s;
-        cursor: pointer;
-    }
-    .back-button:active { transform: scale(0.9); }
-    .page-title { font-size: 28px; font-weight: bold; margin: 0; }
+        /* Tool Header */
+        .nav-back { display: flex; align-items: center; padding: 20px; gap: 16px; max-width: 900px; margin: 0 auto; }
+        .back-button {
+            width: 44px; height: 44px;
+            background: var(--glass-bg);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; color: white;
+            font-weight: bold; font-size: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .back-button:active { transform: scale(0.9); }
+        .page-title { font-size: 28px; font-weight: bold; margin: 0; }
 
-    /* Content Container */
-    .content { 
-        max-width: 900px; 
-        margin: 0 auto; 
-        padding: 0 20px 40px; 
-    }
+        /* Content Container */
+        .content { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 0 20px 40px; 
+        }
 
-    .tools-grid {
-        display: grid;
-        /* Standard Mobile: 2 Spalten */
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-        margin-top: 24px;
-    }
-
-    /* Desktop-Ansicht: 3 Spalten ab Tablet-Breite */
-    @media (min-width: 768px) {
         .tools-grid {
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 24px;
         }
-    }
 
-    /* ToolCard */
-    .tool-card {
-        aspect-ratio: 1 / 1;
-        background: var(--glass-bg);
-        border: 1px solid var(--glass-border);
-        border-radius: 24px;
-        padding: 16px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        cursor: pointer;
-        transition: all 0.2s ease-out;
-    }
-    
-    @media (hover: hover) {
-        .tool-card:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-5px);
+        @media (min-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 20px;
+            }
         }
-    }
-    .tool-card:active { transform: scale(0.95); }
 
-    .tool-icon {
-        width: 36px;
-        height: 36px;
-        background-color: white;
-        -webkit-mask-size: contain;
-        mask-size: contain;
-        -webkit-mask-repeat: no-repeat;
-        mask-repeat: no-repeat;
-    }
+        /* ToolCard */
+        .tool-card {
+            aspect-ratio: 1 / 1;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            cursor: pointer;
+            transition: all 0.2s ease-out;
+        }
+        
+        @media (hover: hover) {
+            .tool-card:hover {
+                background: rgba(255, 255, 255, 0.1);
+                transform: translateY(-5px);
+            }
+        }
+        .tool-card:active { transform: scale(0.95); }
 
-    .tool-info h3 {
-        margin: 0; font-size: 14px; font-weight: bold;
-        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .tool-info p {
-        margin: 4px 0 0; font-size: 10px; opacity: 0.6;
-        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
+        .tool-icon {
+            width: 36px;
+            height: 36px;
+            background-color: white;
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+        }
 
-    /* Detail Overlay */
-    .overlay {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.85);
-        display: none; align-items: center; justify-content: center;
-        z-index: 1000; backdrop-filter: blur(10px);
-    }
-    .detail-card {
-        background: #121212; padding: 40px 30px;
-        border-radius: 32px; max-width: 400px; text-align: center;
-        border: 1px solid var(--glass-border);
-        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        margin: 20px;
-    }
-</style>
+        .tool-info h3 {
+            margin: 0; font-size: 14px; font-weight: bold;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .tool-info p {
+            margin: 4px 0 0; font-size: 10px; opacity: 0.6;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+
+        /* Detail Overlay */
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: none; align-items: center; justify-content: center;
+            z-index: 1000; backdrop-filter: blur(10px);
+        }
+        .detail-card {
+            background: #121212; padding: 40px 30px;
+            border-radius: 32px; max-width: 400px; text-align: center;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            margin: 20px;
+        }
+    </style>
 </head>
 <body>
 
@@ -140,8 +139,8 @@
             <h2 id="detailTitle" style="margin-top:0"></h2>
             <p id="detailDesc" style="line-height:1.6; opacity: 0.8;"></p>
             <button onclick="document.getElementById('overlay').style.display='none'" 
-                style="margin-top:20px; background: white; border:none; padding: 10px 20px; border-radius:12px; font-weight:bold; cursor:pointer;">
-                Schließen
+                style="margin-top:20px; background: white; border:none; padding: 12px 24px; border-radius:16px; font-weight:bold; cursor:pointer;">
+                Verstanden
             </button>
         </div>
     </div>
@@ -176,9 +175,19 @@
                     <p>${tool.desc}</p>
                 </div>
             `;
+            
             card.onclick = () => {
+                // Hole Beschreibung aus der externen tool_descriptions.js (Objekt: toolDescriptions)
+                const extraInfo = typeof toolDescriptions !== 'undefined' ? toolDescriptions[tool.file] : null;
+                
                 document.getElementById('detailTitle').innerText = tool.name;
-                document.getElementById('detailDesc').innerText = `Nutze das ${tool.name} Werkzeug, um präzise Daten über ${tool.desc} direkt von deinen Hardware-Sensoren zu erhalten.`;
+                
+                if (extraInfo) {
+                    document.getElementById('detailDesc').innerText = extraInfo.info;
+                } else {
+                    document.getElementById('detailDesc').innerText = `Nutze das ${tool.name} Werkzeug für präzise Messungen.`;
+                }
+                
                 document.getElementById('overlay').style.display = 'flex';
             };
             grid.appendChild(card);
