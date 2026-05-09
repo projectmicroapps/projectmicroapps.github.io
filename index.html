@@ -6,17 +6,18 @@
     <title>Project Micro | Official Site</title>
     <style>
         :root {
-            /* Fallback Farbe */
             --accent-color: #1A1C1E; 
         }
 
+        * {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
         body, html {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
+            margin: 0; padding: 0; min-height: 100vh;
             font-family: 'Segoe UI', Roboto, sans-serif;
             color: white;
-            /* Gradient: Oben links Schwarz, unten rechts Akzentfarbe */
             background: linear-gradient(to bottom right, #000000 0%, var(--accent-color) 100%);
             background-attachment: fixed;
             display: flex;
@@ -24,37 +25,26 @@
             transition: background 0.8s ease;
         }
 
-        header {
-            padding: 100px 20px 40px;
-            text-align: center;
-        }
+        header { padding: 100px 20px 40px; text-align: center; }
 
         h1 {
-            font-size: 3.5rem;
-            margin: 0;
-            font-weight: 700;
-            letter-spacing: -2px;
+            font-size: 3.5rem; margin: 0;
+            font-weight: 700; letter-spacing: -2px;
             text-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
 
         .subtitle {
-            opacity: 0.5;
-            font-size: 1.2rem;
-            margin-top: 10px;
-            text-transform: uppercase;
+            opacity: 0.5; font-size: 1.2rem;
+            margin-top: 10px; text-transform: uppercase;
             letter-spacing: 2px;
         }
 
         .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            flex-grow: 1;
-            width: 100%;
+            max-width: 600px; margin: 0 auto;
+            padding: 20px; flex-grow: 1; width: 100%;
             box-sizing: border-box;
         }
 
-        /* Glassmorphism App-Card */
         .app-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
@@ -68,56 +58,34 @@
             transition: transform 0.3s ease, background 0.3s ease;
         }
 
-        .app-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.06);
-        }
+        .app-card:hover { transform: translateY(-10px); background: rgba(255, 255, 255, 0.06); }
+        .app-card:active { transform: scale(0.98); }
 
         .app-icon {
-            width: 80px;
-            height: 80px;
+            width: 80px; height: 80px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
             margin: 0 auto 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-weight: bold;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; font-weight: bold;
             border: 1px solid rgba(255,255,255,0.1);
             color: rgba(255,255,255,0.9);
         }
 
-        h2 { 
-            margin-bottom: 15px; 
-            font-size: 1.8rem;
-        }
+        h2 { margin-bottom: 15px; font-size: 1.8rem; }
 
         .status-tag {
-            display: inline-block;
-            padding: 6px 16px;
+            display: inline-block; padding: 6px 16px;
             background: rgba(255,255,255,0.1);
-            border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 20px;
+            border-radius: 100px; font-size: 0.8rem;
+            font-weight: 600; margin-bottom: 20px;
             color: var(--accent-color);
             filter: brightness(1.5);
         }
 
-        p { 
-            opacity: 0.7; 
-            line-height: 1.6; 
-            margin-bottom: 0;
-            font-size: 1.05rem;
-        }
+        p { opacity: 0.7; line-height: 1.6; margin-bottom: 0; font-size: 1.05rem; }
 
-        footer {
-            text-align: center;
-            padding: 60px;
-            font-size: 0.8rem;
-            opacity: 0.3;
-        }
+        footer { text-align: center; padding: 60px; font-size: 0.8rem; opacity: 0.3; }
     </style>
 </head>
 <body>
@@ -132,37 +100,22 @@
             <div class="app-icon">MT</div>
             <div class="status-tag">In Entwicklung</div>
             <h2>MikroTools</h2>
-            <p>Die ultimative All-in-One Lösung für Konvertierung, Scannen und tägliche Tools. Demnächst im Google Play Store verfügbar.</p>
+            <p>Die ultimative All-in-One Lösung für Konvertierung, Scannen und tägliche Tools.</p>
         </div>
     </div>
 
-    <footer>
-        &copy; 2026 Project Micro
-    </footer>
+    <footer>&copy; 2026 Project Micro</footer>
 
     <script>
-        const mikroColors = [
-            '#C0C0C0', // Silver
-            '#01163E', // Deep Blue
-            '#013E16', // Deep Green
-            '#2B013E', // Deep Purple
-            '#3E0101', // Deep Red
-            '#1A1C1E'  // Dark Grey
-        ];
-
-        // 1. Farbe aus URL holen oder zufällig wählen
+        const mikroColors = ['#C0C0C0', '#01163E', '#013E16', '#2B013E', '#3E0101', '#1A1C1E'];
         const urlParams = new URLSearchParams(window.location.search);
         const colorFromUrl = urlParams.get('color');
 
         let activeColor = colorFromUrl || mikroColors[Math.floor(Math.random() * mikroColors.length)];
-
-        // 2. CSS-Variable setzen
         document.documentElement.style.setProperty('--accent-color', activeColor);
 
-        // 3. Navigation mit Farbübergabe
         function navigateToApp() {
-            const colorParam = encodeURIComponent(activeColor);
-            window.location.href = `./mikrotools/index.html?color=${colorParam}`;
+            window.location.href = `./mikrotools/index.html?color=${encodeURIComponent(activeColor)}`;
         }
     </script>
 </body>
