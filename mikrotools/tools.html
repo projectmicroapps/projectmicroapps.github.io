@@ -176,26 +176,24 @@
                 </div>
             `;
             
- card.onclick = () => {
-    const extraInfo = typeof toolDescriptions !== 'undefined' ? toolDescriptions[tool.file] : null;
-    
-    document.getElementById('detailTitle').innerText = tool.name;
-    
-    if (extraInfo) {
-        // WICHTIG: Benutze <br><br> für eine neue Zeile + eine Leerzeile
-        const formattedText = 
-            extraInfo.info + 
-            "<br><br><br><b>" + extraInfo.usageTitle + "</b><br><br>" + 
-            extraInfo.usage;
-
-        // Nutze innerHTML, damit die <br> und <b> Tags interpretiert werden
-        document.getElementById('detailDesc').innerHTML = formattedText;
-    } else {
-        document.getElementById('detailDesc').innerText = `Nutze das ${tool.name} Werkzeug.`;
-    }
-    
-    document.getElementById('overlay').style.display = 'flex';
-};
+            card.onclick = () => {
+                const extraInfo = typeof toolDescriptions !== 'undefined' ? toolDescriptions[tool.file] : null;
+                document.getElementById('detailTitle').innerText = tool.name;
+                
+                if (extraInfo) {
+                    // Zusammenbau des Inhalts mit fettem Titel und Leerzeilen
+                    const formattedText = `
+                        ${extraInfo.info}<br><br>
+                        <b>${extraInfo.usageTitle}</b><br><br>
+                        ${extraInfo.usage}
+                    `;
+                    document.getElementById('detailDesc').innerHTML = formattedText;
+                } else {
+                    document.getElementById('detailDesc').innerText = `Nutze das ${tool.name} Werkzeug für präzise Messungen.`;
+                }
+                
+                document.getElementById('overlay').style.display = 'flex';
+            };
             grid.appendChild(card);
         });
 
