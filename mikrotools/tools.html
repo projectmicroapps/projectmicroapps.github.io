@@ -177,20 +177,21 @@
             `;
             
             card.onclick = () => {
-                const extraInfo = typeof toolDescriptions !== 'undefined' ? toolDescriptions[tool.file] : null;
+    const extraInfo = typeof toolDescriptions !== 'undefined' ? toolDescriptions[tool.file] : null;
     
-                    document.getElementById('detailTitle').innerText = tool.name;
+    document.getElementById('detailTitle').innerText = tool.name;
     
-                    if (extraInfo) {
-                        // Wir bauen den Text Schritt für Schritt zusammen und prüfen, ob die Felder existieren
-                        let content = extraInfo.info || ""; 
+    if (extraInfo) {
+        let content = extraInfo.info || ""; 
 
-                    if (extraInfo.usageTitle && extraInfo.usage) {
-                        content += `<br><br><b>${extraInfo.usageTitle}</b><br><br>${extraInfo.usage}`;
-                    }
+        if (extraInfo.usageTitle && extraInfo.usage) {
+            // Wir nutzen hier drei <br>, um über und unter dem fetten Titel 
+            // eine echte, volle Leerzeile zu erzwingen.
+            content += `<br><br><br><b>${extraInfo.usageTitle}</b><br><br>${extraInfo.usage}`;
+        }
 
-                document.getElementById('detailDesc').innerHTML = content;
-            } else {
+        document.getElementById('detailDesc').innerHTML = content;
+    } else {
         document.getElementById('detailDesc').innerText = `Nutze das ${tool.name} Werkzeug für präzise Messungen.`;
     }
     
