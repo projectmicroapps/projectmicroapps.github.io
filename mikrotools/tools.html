@@ -177,13 +177,17 @@
             `;
             
             card.onclick = () => {
-                // Hole Beschreibung aus der externen tool_descriptions.js (Objekt: toolDescriptions)
                 const extraInfo = typeof toolDescriptions !== 'undefined' ? toolDescriptions[tool.file] : null;
-                
                 document.getElementById('detailTitle').innerText = tool.name;
                 
                 if (extraInfo) {
-                    document.getElementById('detailDesc').innerText = extraInfo.info;
+                    // Zusammenbau des Inhalts mit fettem Titel und Leerzeilen
+                    const formattedText = `
+                        ${extraInfo.info}<br><br>
+                        <b>${extraInfo.usageTitle}</b><br><br>
+                        ${extraInfo.usage}
+                    `;
+                    document.getElementById('detailDesc').innerHTML = formattedText;
                 } else {
                     document.getElementById('detailDesc').innerText = `Nutze das ${tool.name} Werkzeug für präzise Messungen.`;
                 }
